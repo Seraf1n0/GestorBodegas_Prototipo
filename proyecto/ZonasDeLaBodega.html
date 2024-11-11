@@ -20,6 +20,110 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+    .container {
+    background-color: #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #2e3b4e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    margin-top: 15px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.BTN-Registrarsh {
+    width:50%;
+    padding: 12px;
+    background-color: #2e3b4e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.BTN-Registrarsh:hover {
+    background-color: #243445;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #2e3b4e;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+
+.btnEliminar {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .btnEliminar:hover {
+            background-color: darkred;
+        }
+</style>
 <body>
     <!--Sidebar-->
     <nav>
@@ -112,7 +216,30 @@
         </div>
     </nav>
     <!--Sidebar-->
+    <div class="container">
+        <form id="formRegistro">
+            <h1>Zonas de la Bodega</h1>
+            <label for="motivo">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre de la zona" required class="entradaNombre">
+                <label for="motivo">Descripción</label>
+                <textarea id="motivo" name="motivo" rows="3" placeholder="Ingrese la descripción"></textarea>
+            
+            <input type="submit" value="Registrar Zona" class="BTN-Registrarsh">
+        </form>
 
+        <table id="zonaTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas de la tabla se agregarán aquí con JavaScript -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -136,5 +263,90 @@
                 
     
         </script>
+
+<script>
+    // Array para almacenar las zonas registradas
+    const zonasRegistradas = [];
+
+    // Obtener el formulario y la tabla
+    const form = document.getElementById("formRegistro");
+    const nombreInput = document.getElementById("nombre");
+    const motivoInput = document.getElementById("motivo");
+    const zonaTable = document.getElementById("zonaTable").getElementsByTagName("tbody")[0];
+
+    // Función para agregar la zona a la tabla
+    function agregarZona(nombre, descripcion) {
+        const row = zonaTable.insertRow();
+        const cellNombre = row.insertCell(0);
+        const cellDescripcion = row.insertCell(1);
+        const cellAcciones = row.insertCell(2);
+
+        // Añadir los valores a las celdas
+        cellNombre.textContent = nombre;
+        cellDescripcion.textContent = descripcion;
+
+        // Crear el botón de eliminar
+        const btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "Eliminar";
+            btnEliminar.classList.add("btnEliminar"); // Asegurarse de que la clase esté correctamente asignada
+            btnEliminar.onclick = function() {
+                row.remove(); // Eliminar la fila de la tabla
+                // También eliminar la zona del array
+                const index = zonasRegistradas.indexOf(nombre);
+                if (index > -1) {
+                    zonasRegistradas.splice(index, 1);
+                }
+            };
+            cellAcciones.appendChild(btnEliminar);
+    }
+
+    // Evento para manejar el envío del formulario
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevenir el envío del formulario
+
+        const nombreZona = nombreInput.value.trim();
+        const descripcionZona = motivoInput.value.trim();
+
+        // Verificar si la zona ya está registrada
+        if (zonasRegistradas.includes(nombreZona)) {
+            Swal.fire({
+      icon: 'error',
+      title: 'Zona ya existente',
+      text: 'Esta zona ya ha sido registrada previamente',
+    });
+        } else {
+            // Agregar la zona al array
+            zonasRegistradas.push(nombreZona);
+
+            // Llamar a la función para agregar la zona a la tabla
+            agregarZona(nombreZona, descripcionZona);
+            Swal.fire({
+      icon: 'success',
+      title: 'Zona registrada',
+      text: 'La zona ha sido registrada correctamente.',
+    });
+            
+
+            // Limpiar los campos del formulario
+            form.reset();
+        }
+    });
+
+    // Agregar valores predeterminados a la tabla
+    window.onload = function() {
+            const zonasPredeterminadas = [
+                { nombre: "Zona A", descripcion: "Área de electrodomésticos" },
+                { nombre: "Zona B", descripcion: "Área de línea blanca" },
+                { nombre: "Zona C", descripcion: "Área de muebles" }
+            ];
+
+            zonasPredeterminadas.forEach(zona => {
+                if (!zonasRegistradas.includes(zona.nombre)) {
+                    zonasRegistradas.push(zona.nombre);
+                    agregarZona(zona.nombre, zona.descripcion);
+                }
+            });
+        };
+</script>
 
 </body>
