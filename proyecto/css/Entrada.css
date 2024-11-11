@@ -81,16 +81,3 @@ table th {
 table td {
     background-color: #f9f9f9;
 }
-
-#confirmacion {
-    margin-top: 15px;
-    padding: 10px;
-    color: #2e3b4e;
-    background-color: #e0f7e9;
-    border: 1px solid #c3e6cb;
-    border-radius: 4px;
-}
-
-.hidden {
-    display: none;
-}
