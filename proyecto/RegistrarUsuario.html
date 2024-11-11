@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Bodegas - Asignación de Operación</title>
+
+    <link rel="stylesheet" href="/css/SideBarAdm.css" asp-append-version="true" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
+    
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    
+    <!--Para mensajes-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.Rol {
+  display: inline-flex;
+  gap: 10px; /* Espacio entre las opciones */
+  align-items: center;
+}
+</style>
+<body>
+    <!--Sidebar-->
+    <nav>
+        <div class="logo">
+            <i class='bx bx-menu menu-icon'></i>
+            <span class=" ">Técnico</span>
+        </div>
+
+        
+        <div class="sidebar">
+            
+            <div class="logo">
+                <i class='bx bx-menu menu-icon'></i>
+                <span class=" " >Técnico</span>
+            </div>
+
+            <div class="sidebar-content">
+                <ul class="lists">
+
+                    <li class="list">
+                        <a href="RegistrarUsuario.html" class="nav-link">
+                            <i class='bi bi-file-earmark-person icon' ></i>
+                            <span class="link">Registrar Usuario</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="DesactivarActivarBodegueros.html" class="nav-link">
+                            <i class='bi bi-person-check-fill icon' ></i> 
+                            <span class="link">Desactivar/Activar Bodegueros</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarBodega.html" class="nav-link">
+                            <i class='bi bi-box-seam icon' ></i>
+                            <span class="link">Registrar Bodega</span>
+
+                        </a>
+                    </li>
+
+                  
+
+                    <li class="list">
+                        <a href="ZonasDeLaBodega.html" class="nav-link">
+                            <i class='bi bi-bookshelf icon'></i>  
+                            <span class="link">Zonas de la Bodega</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarCategoria.html" class="nav-link">
+                            <i class='bi bi-tags icon'></i>
+                            <span class="link">Registrar Categoría</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarProducto.html" class="nav-link">
+                            <i class='bi bi-clipboard-plus icon'></i>
+                            <span class="link">Registrar Producto</span>
+
+                        </a>
+                    </li>
+                    
+                    <li class="list">
+                        <a href="DesactivarActivarProductos.html" class="nav-link">
+                            <i class='bi bi-clipboard-x icon'></i>
+                            <span class="link">Desactivar/Activar Productos</span>
+                        </a>
+                    </li>
+
+                    
+                </ul>
+                <div class="bottom-content">
+
+                    <li class="list">
+                        <a href="Login.html" class="nav-link">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="link">Cerrar Sesión</span>
+
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--Sidebar-->
+    <div class="container">
+        <form id="formRegistro">
+            <h1>Registrar Usuario</h1>
+            <div class="DatosPersonales">
+                <h2>Datos Del Usuario</h2>
+            <input type="text" id="cedula" name="cedula" maxlength="9" minlength="9" pattern="\d{9}" placeholder="Ingrese la cédula" title="Debe contener exactamente 9 dígitos" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" required >
+            <input type="text" id="apellido1" name="apellido1" placeholder="Ingrese el primer apellido" required >
+            <input type="text" id="apellido2" name="apellido2" placeholder="Ingrese el segundo apellido" required >
+            </div>
+            <br>
+
+            <h2>Rol</h2>
+            <div class="Rol">
+                
+                <input type="radio" id="administrador" name="rol" value="Administrador"  required checked>
+                <label for="administrador">Administrador</label>
+              
+                <input type="radio" id="bodeguero" name="rol" value="Bodeguero" required>
+                <label for="bodeguero">Bodeguero</label>
+            </div>
+            <br>
+            <br>
+            <h2>Datos Para Iniciar Sesión</h2>
+            <div class="DatosInicioSesion">
+                <div>
+                <label >Correo Electrónico: </label>
+                <input type="text" id="correoElectronico" name="correoElectronico" disabled>
+                <label for="dominio">@bode.gest</label>
+                </div>
+                <div>
+                    <label >Contraseña: </label>
+                    <input type="text" id="contrasenia" name="contrasenia" disabled>
+                </div>
+            </div>
+
+            <input type="submit" value="Registrar Usuario">
+        </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <section class="overlay">
+
+        <script>
+            const navBar = document.querySelector("nav"),
+                menuBtns = document.querySelectorAll(".menu-icon"),
+                overlay = document.querySelector(".overlay");
+            menuBtns.forEach(menuBtn => { 
+                menuBtn.addEventListener("click", () => {
+                    navBar.classList.toggle("open")
+                })
+            })
+    
+            overlay.addEventListener("click", () => {
+                navBar.classList.remove("open")
+            })
+    
+                
+    
+        </script>
+
+</body>

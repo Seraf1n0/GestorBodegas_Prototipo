@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Bodegas - Asignación de Operación</title>
+
+    <link rel="stylesheet" href="/css/SideBarAdm.css" asp-append-version="true" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css" />
+    
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    
+    <!--Para mensajes-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+<body>
+    <!--Sidebar-->
+    <nav>
+        <div class="logo">
+            <i class='bx bx-menu menu-icon'></i>
+            <span class=" ">Técnico</span>
+        </div>
+
+        
+        <div class="sidebar">
+            
+            <div class="logo">
+                <i class='bx bx-menu menu-icon'></i>
+                <span class=" " >Técnico</span>
+            </div>
+
+            <div class="sidebar-content">
+                <ul class="lists">
+
+                    <li class="list">
+                        <a href="RegistrarUsuario.html" class="nav-link">
+                            <i class='bi bi-file-earmark-person icon' ></i>
+                            <span class="link">Registrar Usuario</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="DesactivarActivarBodegueros.html" class="nav-link">
+                            <i class='bi bi-person-check-fill icon' ></i> 
+                            <span class="link">Desactivar/Activar Bodegueros</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarBodega.html" class="nav-link">
+                            <i class='bi bi-box-seam icon' ></i>
+                            <span class="link">Registrar Bodega</span>
+
+                        </a>
+                    </li>
+
+                  
+
+                    <li class="list">
+                        <a href="ZonasDeLaBodega.html" class="nav-link">
+                            <i class='bi bi-bookshelf icon'></i>  
+                            <span class="link">Zonas de la Bodega</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarCategoria.html" class="nav-link">
+                            <i class='bi bi-tags icon'></i>
+                            <span class="link">Registrar Categoría</span>
+
+                        </a>
+                    </li>
+
+                    <li class="list">
+                        <a href="RegistrarProducto.html" class="nav-link">
+                            <i class='bi bi-clipboard-plus icon'></i>
+                            <span class="link">Registrar Producto</span>
+
+                        </a>
+                    </li>
+                    
+                    <li class="list">
+                        <a href="DesactivarActivarProductos.html" class="nav-link">
+                            <i class='bi bi-clipboard-x icon'></i>
+                            <span class="link">Desactivar/Activar Productos</span>
+                        </a>
+                    </li>
+
+                    
+                </ul>
+                <div class="bottom-content">
+
+                    <li class="list">
+                        <a href="Login.html" class="nav-link">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="link">Cerrar Sesión</span>
+
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--Sidebar-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <section class="overlay">
+
+        <script>
+            const navBar = document.querySelector("nav"),
+                menuBtns = document.querySelectorAll(".menu-icon"),
+                overlay = document.querySelector(".overlay");
+            menuBtns.forEach(menuBtn => { 
+                menuBtn.addEventListener("click", () => {
+                    navBar.classList.toggle("open")
+                })
+            })
+    
+            overlay.addEventListener("click", () => {
+                navBar.classList.remove("open")
+            })
+    
+                
+    
+        </script>
+
+</body>
