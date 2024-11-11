@@ -47,6 +47,50 @@
   gap: 10px; /* Espacio entre las opciones */
   align-items: center;
 }
+
+h1 {
+    color: #2e3b4e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.BTN-Registrarsh {
+    width:50%;
+    padding: 12px;
+    background-color: #2e3b4e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.BTN-Registrarsh:hover {
+    background-color: #243445;
+}
+
+
+
+.DatosPersonales input {
+    margin: 5px;
+}
+
+.DatosInicioSesion input{
+    margin: 5px;
+}
 </style>
 <body>
     <!--Sidebar-->
@@ -155,9 +199,9 @@
             <h2>Rol</h2>
             <div class="Rol">
                 
-                <input type="radio" id="administrador" name="rol" value="Administrador"  required checked>
+                <input type="radio" id="administrador" name="rol" value="Administrador" required checked>
                 <label for="administrador">Administrador</label>
-              
+                
                 <input type="radio" id="bodeguero" name="rol" value="Bodeguero" required>
                 <label for="bodeguero">Bodeguero</label>
             </div>
@@ -168,15 +212,15 @@
                 <div>
                 <label >Correo Electrónico: </label>
                 <input type="text" id="correoElectronico" name="correoElectronico" disabled>
-                <label for="dominio">@bode.gest</label>
-                </div>
-                <div>
+                <label for="dominio" id="dominio">@bode.adm</label>
+
+
                     <label >Contraseña: </label>
                     <input type="text" id="contrasenia" name="contrasenia" disabled>
                 </div>
             </div>
 
-            <input type="submit" value="Registrar Usuario">
+            <input type="submit" value="Registrar Usuario" class="BTN-Registrarsh">
         </form>
 
     </div>
@@ -203,5 +247,83 @@
                 
     
         </script>
+    <script>
+        // Obtener los elementos de los radio buttons y la etiqueta de dominio
+const administradorRadio = document.getElementById('administrador');
+const bodegueroRadio = document.getElementById('bodeguero');
+const dominioLabel = document.getElementById('dominio');
 
+// Función para actualizar el dominio según el radio button seleccionado
+function actualizarDominio() {
+  if (administradorRadio.checked) {
+    dominioLabel.textContent = "@bode.adm";
+  } else if (bodegueroRadio.checked) {
+    dominioLabel.textContent = "@bode.gest";
+  }
+}
+
+// Añadir eventos a los radio buttons para detectar cambios
+administradorRadio.addEventListener('change', actualizarDominio);
+bodegueroRadio.addEventListener('change', actualizarDominio);
+
+// Llamar la función al cargar la página para ajustar el valor inicial
+actualizarDominio();
+    </script>
+    <script>
+        // Función para generar una cadena aleatoria de 7 caracteres
+function generarContrasenia() {
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let contrasenia = '';
+  
+  // Generar una contrasenia de 7 caracteres aleatorios
+  for (let i = 0; i < 7; i++) {
+    const randomIndex = Math.floor(Math.random() * caracteres.length);
+    contrasenia += caracteres[randomIndex];
+  }
+
+  // Colocar la contrasenia generada en el campo de texto
+  document.getElementById('contrasenia').value = contrasenia;
+}
+
+// Llamar a la función para generar y colocar la contrasenia cuando la página cargue
+generarContrasenia();
+
+    </script>
+
+    <script>
+        // Obtener los elementos de cédula y correo electrónico
+const cedulaInput = document.getElementById('cedula');
+const correoInput = document.getElementById('correoElectronico');
+
+// Función para copiar el valor de la cédula al correo electrónico
+function copiarCedulaACorreo() {
+  correoInput.value = cedulaInput.value; // Copiar el valor de cédula al campo de correo electrónico
+}
+
+// Añadir un evento para copiar el valor cada vez que se modifique el campo de cédula
+cedulaInput.addEventListener('input', copiarCedulaACorreo);
+
+    </script>
+    <script>
+        // Obtener el formulario
+const form = document.getElementById('formRegistro');
+
+// Agregar el evento de envío al formulario
+form.addEventListener('submit', function(event) {
+  event.preventDefault();  // Detener el envío del formulario para manejarlo con JavaScript
+
+  // Verificar si el formulario es válido
+  if (form.checkValidity()) {
+    // Si el formulario es válido, mostrar un SweetAlert de éxito
+    Swal.fire({
+      icon: 'success',
+      title: 'Registrar Usuario',
+      text: 'El usuario ha sido registrado correctamente.',
+    }).then(() => {
+      // Recargar la página después de mostrar el SweetAlert
+      location.reload();
+    });
+  } 
+});
+    </script>
 </body>

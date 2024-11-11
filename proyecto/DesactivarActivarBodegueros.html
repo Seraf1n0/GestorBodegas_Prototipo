@@ -20,6 +20,87 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+    .container {
+    background-color: #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 1400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #2e3b4e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.BTN-Registrarsh {
+    width:50%;
+    padding: 12px;
+    background-color: #2e3b4e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.BTN-Registrarsh:hover {
+    background-color: #243445;
+}
+
+.entradaNombre {
+  width: 300px;  /* Cambia este valor para ajustarlo al tamaño que desees */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Establece un ancho fijo para las columnas */
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #2e3b4e;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+</style>
+
 <body>
     <!--Sidebar-->
     <nav>
@@ -112,7 +193,27 @@
         </div>
     </nav>
     <!--Sidebar-->
+    <div class="container">
+        <h1>Desactivar y/o Activar Bodegueros</h1>
 
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Rol</th>
+                    <th>Activo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán aquí mediante el script -->
+            </tbody>
+        </table>
+        
+        
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -134,7 +235,69 @@
             })
     
                 
-    
+            
         </script>
 
+
+        <script>
+       // Datos de ejemplo
+const empleados = [
+    { cedula: '123456789', nombre: 'Juan', apellido1: 'Pérez', apellido2: 'López', rol: 'Administrador', activo: true },
+    { cedula: '987654321', nombre: 'María', apellido1: 'Gómez', apellido2: 'Hernández', rol: 'Bodeguero', activo: false },
+    { cedula: '111223344', nombre: 'Carlos', apellido1: 'Ruiz', apellido2: 'Sánchez', rol: 'Administrador', activo: true },
+    { cedula: '555666777', nombre: 'Ana', apellido1: 'Martínez', apellido2: 'Pérez', rol: 'Bodeguero', activo: false },
+    { cedula: '888999000', nombre: 'José', apellido1: 'Rodríguez', apellido2: 'Ramírez', rol: 'Administrador', activo: true }
+];
+
+// Función para llenar la tabla
+function llenarTabla() {
+    const tablaBody = document.querySelector('#tabla tbody');
+    
+    empleados.forEach(emp => {
+        const fila = document.createElement('tr');
+        
+        // Crear celdas para cada campo
+        const celdaCedula = document.createElement('td');
+        celdaCedula.textContent = emp.cedula;
+
+        const celdaNombre = document.createElement('td');
+        celdaNombre.textContent = emp.nombre;
+
+        const celdaApellido1 = document.createElement('td');
+        celdaApellido1.textContent = emp.apellido1;
+
+        const celdaApellido2 = document.createElement('td');
+        celdaApellido2.textContent = emp.apellido2;
+
+        const celdaRol = document.createElement('td');
+        celdaRol.textContent = emp.rol;
+
+        const celdaActivo = document.createElement('td');
+        const checkActivo = document.createElement('input');
+        checkActivo.type = 'checkbox';
+        checkActivo.checked = emp.activo;
+        checkActivo.addEventListener('change', function() {
+            // Actualizar el estado de "activo" en el array
+            emp.activo = checkActivo.checked;
+        });
+
+        celdaActivo.appendChild(checkActivo);
+
+        // Agregar celdas a la fila
+        fila.appendChild(celdaCedula);
+        fila.appendChild(celdaNombre);
+        fila.appendChild(celdaApellido1);
+        fila.appendChild(celdaApellido2);
+        fila.appendChild(celdaRol);
+        fila.appendChild(celdaActivo);
+
+        // Agregar la fila a la tabla
+        tablaBody.appendChild(fila);
+    });
+}
+
+// Llenar la tabla al cargar la página
+document.addEventListener('DOMContentLoaded', llenarTabla);
+
+        </script>
 </body>

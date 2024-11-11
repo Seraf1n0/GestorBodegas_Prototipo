@@ -20,6 +20,87 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+    .container {
+    background-color: #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 1400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #2e3b4e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.BTN-Registrarsh {
+    width:50%;
+    padding: 12px;
+    background-color: #2e3b4e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.BTN-Registrarsh:hover {
+    background-color: #243445;
+}
+
+.entradaNombre {
+  width: 300px;  /* Cambia este valor para ajustarlo al tamaño que desees */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Establece un ancho fijo para las columnas */
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #2e3b4e;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+</style>
+
 <body>
     <!--Sidebar-->
     <nav>
@@ -112,7 +193,26 @@
         </div>
     </nav>
     <!--Sidebar-->
+    <div class="container">
+        <h1>Desactivar y/o Activar Productos</h1>
 
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría/th>
+                    <th>Cantidad en inventario</th>
+                    <th>Zona</th>
+                    <th>Activo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán aquí mediante el script -->
+            </tbody>
+        </table>
+        
+        
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -134,7 +234,85 @@
             })
     
                 
-    
+            
         </script>
 
+
+       <script>
+        // Asegúrate de incluir SweetAlert en tu página (si aún no lo has hecho)
+
+
+// Datos de ejemplo
+const productos = [
+    { nombre: 'Televisor', categoria: 'Tecnología', cantidad: 10, zona: 'Estanterías', activo: true },
+    { nombre: 'Refrigeradora', categoria: 'Línea Blanca', cantidad: 0, zona: 'Tarimas', activo: true },
+    { nombre: 'Silla', categoria: 'Muebles', cantidad: 5, zona: 'Estanterías', activo: true },
+    { nombre: 'Lavadora', categoria: 'Línea Blanca', cantidad: 0, zona: 'Tarimas', activo: false },
+    { nombre: 'Celular', categoria: 'Tecnología', cantidad: 15, zona: 'Estanterías', activo: true }
+];
+
+// Función para llenar la tabla
+function llenarTabla() {
+    const tablaBody = document.querySelector('#tabla tbody');
+    
+    productos.forEach(producto => {
+        const fila = document.createElement('tr');
+        
+        // Crear celdas para cada campo
+        const celdaNombre = document.createElement('td');
+        celdaNombre.textContent = producto.nombre;
+
+        const celdaCategoria = document.createElement('td');
+        celdaCategoria.textContent = producto.categoria;
+
+        const celdaCantidad = document.createElement('td');
+        celdaCantidad.textContent = producto.cantidad;
+
+        const celdaZona = document.createElement('td');
+        celdaZona.textContent = producto.zona;
+
+        const celdaActivo = document.createElement('td');
+        const checkActivo = document.createElement('input');
+        checkActivo.type = 'checkbox';
+        checkActivo.checked = producto.activo;
+        
+        // Deshabilitar el checkbox si la cantidad es 0
+        
+
+        // Si la cantidad es 0, mostrar un mensaje de error al intentar desmarcar el checkbox
+        checkActivo.addEventListener('change', function() {
+            if (producto.cantidad != 0 && checkActivo.checked === false) {
+                // Mostrar SweetAlert si se intenta desmarcar un producto con inventario 0
+                Swal.fire({
+                    title: 'Error',
+                    text: 'No se puede desactivar un producto con existencias en el inventario.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+                // Volver a marcar el checkbox
+                checkActivo.checked = true;
+            } else {
+                // Actualizar el estado "activo" si la cantidad es mayor que 0
+                producto.activo = checkActivo.checked;
+            }
+        });
+
+        celdaActivo.appendChild(checkActivo);
+
+        // Agregar celdas a la fila
+        fila.appendChild(celdaNombre);
+        fila.appendChild(celdaCategoria);
+        fila.appendChild(celdaCantidad);
+        fila.appendChild(celdaZona);
+        fila.appendChild(celdaActivo);
+
+        // Agregar la fila a la tabla
+        tablaBody.appendChild(fila);
+    });
+}
+
+// Llenar la tabla al cargar la página
+document.addEventListener('DOMContentLoaded', llenarTabla);
+
+       </script>
 </body>

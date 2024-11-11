@@ -20,6 +20,66 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+    .container {
+    background-color: #ffffff;
+    padding: 40px;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    color: #2e3b4e;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.BTN-Registrarsh {
+    width:50%;
+    padding: 12px;
+    background-color: #2e3b4e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.BTN-Registrarsh:hover {
+    background-color: #243445;
+}
+
+.entradaNombre {
+  width: 300px;  /* Cambia este valor para ajustarlo al tamaño que desees */
+}
+
+</style>
+
 <body>
     <!--Sidebar-->
     <nav>
@@ -112,7 +172,16 @@
         </div>
     </nav>
     <!--Sidebar-->
-
+    <div class="container">
+        <form id="formRegistro">
+            <h1>Registrar Categoría</h1>
+            <div>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre de la categoría" required class="entradaNombre">
+            </div>
+            
+            <input type="submit" value="Registrar Categoría" class="BTN-Registrarsh">
+        </form>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -134,7 +203,44 @@
             })
     
                 
-    
+            
         </script>
+    <script>
+        // Lista para almacenar las categorías
+let categorias = [];
 
+// Obtener el formulario y el campo de texto
+const form = document.getElementById('formRegistro');
+const inputNombre = document.getElementById('nombre');
+
+// Agregar el evento de envío al formulario
+form.addEventListener('submit', function(event) {
+  event.preventDefault();  // Detener el envío del formulario
+
+  // Obtener el nombre de la categoría ingresada
+  const nombreCategoria = inputNombre.value.trim();
+
+  // Verificar si la categoría ya existe en la lista
+  if (categorias.includes(nombreCategoria)) {
+    // Si ya existe, mostrar SweetAlert de error
+    Swal.fire({
+      icon: 'error',
+      title: 'Categoría ya existente',
+      text: 'La categoría ingresada ya ha sido registrada previamente',
+    });
+  } else {
+    // Si no existe, agregarla a la lista y mostrar SweetAlert de éxito
+    categorias.push(nombreCategoria);
+    Swal.fire({
+      icon: 'success',
+      title: 'Categoría registrada',
+      text: 'La categoría ha sido registrada correctamente.',
+    });
+  }
+
+  // Limpiar el campo de texto después de registrar la categoría
+  inputNombre.value = '';
+});
+
+    </script>
 </body>
