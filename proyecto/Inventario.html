@@ -164,27 +164,36 @@
         </script>
 
         <script>
-            // Array de productos de ejemplo
+            
             const productos = [
                 { nombre: 'Refrigerador', categoria: 'electrodomesticos', cantidad: 10, precioUnitario: 250000 },
                 { nombre: 'Televisor', categoria: 'electronica', cantidad: 15, precioUnitario: 150000 },
                 { nombre: 'Audífonos', categoria: 'accesorios', cantidad: 30, precioUnitario: 15000 },
                 { nombre: 'Microondas', categoria: 'electrodomesticos', cantidad: 8, precioUnitario: 90000 },
-                // Agrega más productos según necesites
+                { nombre: 'Laptop', categoria: 'electronica', cantidad: 20, precioUnitario: 700000 }, // Precio aproximado en Gollo
+                { nombre: 'Teclado', categoria: 'accesorios', cantidad: 50, precioUnitario: 20000 },
+                { nombre: 'Mouse', categoria: 'accesorios', cantidad: 60, precioUnitario: 15000 },
+                { nombre: 'Monitor', categoria: 'electronica', cantidad: 25, precioUnitario: 120000 },
+                { nombre: 'Impresora', categoria: 'electronica', cantidad: 12, precioUnitario: 80000 },
+                { nombre: 'Lavadora', categoria: 'electrodomesticos', cantidad: 5, precioUnitario: 180000 },
+                { nombre: 'Secadora', categoria: 'electrodomesticos', cantidad: 5, precioUnitario: 160000 },
+                { nombre: 'Celular', categoria: 'electronica', cantidad: 30, precioUnitario: 250000 },
+                { nombre: 'Tablet', categoria: 'electronica', cantidad: 10, precioUnitario: 220000 },
+                { nombre: 'Aspiradora', categoria: 'electrodomesticos', cantidad: 15, precioUnitario: 75000 },
+                { nombre: 'Parlante Bluetooth', categoria: 'accesorios', cantidad: 40, precioUnitario: 30000 },
+                { nombre: 'Smartwatch', categoria: 'accesorios', cantidad: 25, precioUnitario: 100000 },
+                { nombre: 'Horno', categoria: 'electrodomesticos', cantidad: 6, precioUnitario: 130000 },
+                { nombre: 'Cámara de Seguridad', categoria: 'electronica', cantidad: 20, precioUnitario: 45000 }
             ];
 
-            // Función para cargar productos basados en la categoría seleccionada
             function cargarProductos() {
                 const categoriaSeleccionada = document.getElementById("categoria").value;
                 const tabla = document.getElementById("tablaInventario").getElementsByTagName("tbody")[0];
                 
-                // Limpiar la tabla antes de cargar nuevos datos
                 tabla.innerHTML = "";
 
-                // Filtrar productos que coincidan con la categoría seleccionada
                 const productosFiltrados = productos.filter(producto => producto.categoria === categoriaSeleccionada);
                 
-                // Insertar los productos filtrados en la tabla
                 productosFiltrados.forEach(producto => {
                     const fila = tabla.insertRow();
                     
@@ -202,7 +211,7 @@
                 });
             }
 
-            // Inicializa con la categoría seleccionada por defecto
+            
             document.addEventListener("DOMContentLoaded", cargarProductos);
 
         </script>
