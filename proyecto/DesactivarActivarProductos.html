@@ -75,14 +75,14 @@ select {
 }
 
 .entradaNombre {
-  width: 300px;  /* Cambia este valor para ajustarlo al tamaño que desees */
+  width: 300px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: fixed; /* Establece un ancho fijo para las columnas */
+    table-layout: fixed;
 }
 
 table th, table td {
@@ -239,10 +239,8 @@ table td {
 
 
        <script>
-        // Asegúrate de incluir SweetAlert en tu página (si aún no lo has hecho)
 
 
-// Datos de ejemplo
 const productos = [
     { nombre: 'Televisor', categoria: 'Tecnología', cantidad: 10, zona: 'Estanterías', activo: true },
     { nombre: 'Refrigeradora', categoria: 'Línea Blanca', cantidad: 0, zona: 'Tarimas', activo: true },
@@ -251,7 +249,6 @@ const productos = [
     { nombre: 'Celular', categoria: 'Tecnología', cantidad: 15, zona: 'Estanterías', activo: true }
 ];
 
-// Función para llenar la tabla
 function llenarTabla() {
     const tablaBody = document.querySelector('#tabla tbody');
     
@@ -275,8 +272,6 @@ function llenarTabla() {
         const checkActivo = document.createElement('input');
         checkActivo.type = 'checkbox';
         checkActivo.checked = producto.activo;
-        
-        // Deshabilitar el checkbox si la cantidad es 0
         
 
         // Si la cantidad es 0, mostrar un mensaje de error al intentar desmarcar el checkbox

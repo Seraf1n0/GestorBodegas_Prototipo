@@ -75,7 +75,7 @@ select {
 }
 
 .entradaNombre {
-  width: 300px;  /* Cambia este valor para ajustarlo al tamaño que desees */
+  width: 300px;
 }
 
 </style>
@@ -206,23 +206,19 @@ select {
             
         </script>
     <script>
-        // Lista para almacenar las categorías
 let categorias = [];
 
 // Obtener el formulario y el campo de texto
 const form = document.getElementById('formRegistro');
 const inputNombre = document.getElementById('nombre');
 
-// Agregar el evento de envío al formulario
 form.addEventListener('submit', function(event) {
-  event.preventDefault();  // Detener el envío del formulario
+  event.preventDefault();
 
   // Obtener el nombre de la categoría ingresada
   const nombreCategoria = inputNombre.value.trim();
 
-  // Verificar si la categoría ya existe en la lista
   if (categorias.includes(nombreCategoria)) {
-    // Si ya existe, mostrar SweetAlert de error
     Swal.fire({
       icon: 'error',
       title: 'Categoría ya existente',

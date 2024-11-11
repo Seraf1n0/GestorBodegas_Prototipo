@@ -236,7 +236,6 @@ textarea {
         </script>
 
 <script>
-    // Lista para guardar los nombres de los productos
     let productosGuardados = [];
 
     // Obtener el formulario y el campo de nombre
@@ -244,14 +243,12 @@ textarea {
     const nombreInput = document.getElementById("nombre");
 
     form.addEventListener("submit", function(event) {
-        // Prevenir el envío del formulario
         event.preventDefault();
 
         const nombreProducto = nombreInput.value.trim();
 
         // Verificar si el producto ya está registrado
         if (productosGuardados.includes(nombreProducto)) {
-            // Si el producto ya existe, mostrar un SweetAlert de error
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -267,7 +264,6 @@ textarea {
             });
         }
 
-        // Limpiar el formulario después de la acción
         form.reset();
     });
 </script>
