@@ -14,6 +14,7 @@ body {
     width: 90%;
     max-width: 850px;
     border-radius: 8px;
+    margin-top: 140px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }

@@ -155,6 +155,7 @@
         <form>
             <label for="operacion">Seleccionar Operación</label>
             <select id="operacion" name="operacion">
+                <option value="">Seleccione una operación</option>
                 <option value="001">Operación 001 - Entrada</option>
                 <option value="002">Operación 002 - Salida</option>
                 <option value="003">Operación 003 - Movimiento</option>
@@ -175,10 +176,82 @@
             <label for="descripcion">Descripción de la Operación</label>
             <textarea id="descripcion" name="descripcion" rows="3" placeholder="Descripción adicional..."></textarea>
 
-            <button type="button">Agregar</button>
-            <button type="submit">Asignar Operación</button>
+            <button type="button" onclick="agregarBodeguero()">Agregar</button>
+            <button type="button" onclick="asignarOperacion()">Asignar Operación</button>
         </form>
+
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script>
+        // Verificación de campos vacíos y zona asignada
+        function validarCampos() {
+            const operacion = document.getElementById('operacion').value;
+            const bodegueros = Array.from(document.getElementById('bodegueros').selectedOptions);
+            const fechaLimite = document.getElementById('fecha_limite').value;
+            const descripcion = document.getElementById('descripcion').value;
+
+            if (!operacion) {
+                swal("Error", "Seleccione una operación", "error");
+                return false;
+            }
+
+            if (bodegueros.length === 0) {
+                swal("Error", "Seleccione al menos un bodeguero", "error");
+                return false;
+            }
+
+            if (!fechaLimite) {
+                swal("Error", "Seleccione una fecha límite", "error");
+                return false;
+            }
+
+            if (!descripcion) {
+                swal("Error", "Ingrese una descripción de la operación", "error");
+                return false;
+            }
+
+            return true;
+        }
+
+        function agregarBodeguero() {
+            const bodegueros = Array.from(document.getElementById('bodegueros').selectedOptions);
+            if (bodegueros.length === 0) {
+                swal("Error", "Seleccione al menos un bodeguero para agregar", "error");
+                return;
+            }
+
+            bodegueros.forEach(bodeguero => {
+                const tieneZona = Math.random() < 0.7;
+                if (!tieneZona) {
+                    swal("Advertencia", `El bodeguero ${bodeguero.text} no tiene una zona asignada`, "warning");
+                } else {
+                    swal("Éxito", `Bodeguero ${bodeguero.text} agregado correctamente`, "success");
+                }
+            });
+        }
+
+        function asignarOperacion() {
+            if (!validarCampos()) return;
+
+            const bodegueros = Array.from(document.getElementById('bodegueros').selectedOptions);
+            let todosAsignados = true;
+
+            bodegueros.forEach(bodeguero => {
+                const tieneZona = Math.random() < 0.7;
+                if (!tieneZona) {
+                    swal("Error", `El bodeguero ${bodeguero.text} no tiene zona asignada, no se puede asignar la operación`, "error");
+                    todosAsignados = false;
+                }
+            });
+
+            if (todosAsignados) {
+                swal("Éxito", "Operación asignada a todos los bodegueros seleccionados", "success");
+            }
+        }
+    </script>
+
 
     <section class="overlay">
 
