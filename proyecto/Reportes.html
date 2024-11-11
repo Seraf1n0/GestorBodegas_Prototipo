@@ -129,14 +129,6 @@
                 <option value="movimientos">Movimientos</option>
             </select>
 
-            <label for="producto">Producto</label>
-            <select id="producto" name="producto">
-                <option value="todos">Todos</option>
-                <option value="producto1">Producto 1</option>
-                <option value="producto2">Producto 2</option>
-                <option value="producto3">Producto 3</option>
-            </select>
-
             <label for="bodeguero">Bodeguero</label>
             <select id="bodeguero" name="bodeguero">
                 <option value="todos">Todos</option>
@@ -168,21 +160,21 @@
                 <tbody>
                     <tr>
                         <td>2024-10-15</td>
-                        <td>Producto 1</td>
+                        <td>Refrigerador</td>
                         <td>Juan Pérez</td>
                         <td>Entrada</td>
-                        <td>100</td>
+                        <td>30</td>
                     </tr>
                     <tr>
                         <td>2024-10-16</td>
-                        <td>Producto 2</td>
+                        <td>Teclado</td>
                         <td>María López</td>
                         <td>Salida</td>
                         <td>50</td>
                     </tr>
                 </tbody>
             </table>
-            <button type="button">Imprimir/Guardar PDF</button>
+            <button type="button" onclick="exportPDF()">Imprimir/Guardar PDF</button>
         </div>
     </div>
 
@@ -201,9 +193,11 @@
             overlay.addEventListener("click", () => {
                 navBar.classList.remove("open")
             })
-    
                 
-    
+            function exportPDF() {
+                alert("Función de guardado en PDF en desarrollo.");
+            }
+
         </script>
             <!-- Bootstrap -->
             <script src="~/lib/jquery/dist/jquery.min.js"></script>
